@@ -1,0 +1,9 @@
+%html 
+  %head
+    %link{"type"=>"text/css","rel"=>"stylesheet","href"=>"/stylesheet.css"}
+  %body
+    #main 
+      #title= @title
+      #rant= "<div id='pull_quote'>#{@pull_quote}</div> #{@babble}"
+      #morerant= @more_babble
+      #evenmorerant= @even_more_babble
