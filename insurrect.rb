@@ -26,7 +26,7 @@ class Wordlists
       def initialize
         @things_we_like=Wordlist.new(["rupture","insurrection","crisis","social war","zones of indistinction which need no justification","indifference"])
         @things_we_dont_like=Wordlist.new(["activism","representation","humanism","totality","passivity","banality","fossilization of our desires","mobilization","impotentiality","normalization","absence"])
-        @people_we_dont_like=Wordlist.new(["the mileu","liberalism","the bureaucrats of revolt","anarcho-liberalism"])
+        @people_we_dont_like=Wordlist.new(["the milieu","liberalism","the bureaucrats of revolt","anarcho-liberalism"])
         @things_we_do=Wordlist.new(["desire","riot","occupy everything"])
         @our_things=Wordlist.new(["communes","multiplicities","encounters","becomings","zones of offensive capacity","desiring-bodies"])
         @symbolic_things=Wordlist.new(["burning dumpster","smashed window","moment of friendship","car set aflame","barricaded hallway"])
