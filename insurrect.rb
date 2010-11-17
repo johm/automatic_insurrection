@@ -28,7 +28,7 @@ class Wordlists
         @things_we_dont_like=Wordlist.new(["activism","representation","humanism","totality","passivity","banality","fossilization of our desires","mobilization","impotentiality","normalization","absence"])
         @people_we_dont_like=Wordlist.new(["the milieu","liberalism","the bureaucrats of revolt","anarcho-liberalism"])
         @things_we_do=Wordlist.new(["desire","riot","occupy everything"])
-        @our_things=Wordlist.new(["communes","multiplicities","encounters","becomings","zones of offensive capacity","desiring-bodies"])
+        @our_things=Wordlist.new(["communes","multiplicities","encounters","becomings","zones of offensive opacity","desiring-bodies"])
         @symbolic_things=Wordlist.new(["burning dumpster","smashed window","moment of friendship","car set aflame","barricaded hallway"])
         @things_we_do_to_things=Wordlist.new(["destroy","shatter","negate","reject"])	    
         @things_we_dont_do=Wordlist.new(["organize","negotiate","make demands","be productive"])
