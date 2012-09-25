@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'haml'	
+require 'haml'
 require 'sinatra'
 
 
@@ -7,11 +7,11 @@ require 'sinatra'
 
 class Wordlist
   attr_accessor :words
-  
+
   def initialize(words)
     @words=words
   end
-  
+
   def pick
     return "FAIL" if @words.size==0
     @words=@words.sort_by {rand}
@@ -30,7 +30,7 @@ class Wordlists
         @things_we_do=Wordlist.new(["desire","riot","occupy everything"])
         @our_things=Wordlist.new(["communes","multiplicities","encounters","becomings","zones of offensive opacity","desiring-bodies"])
         @symbolic_things=Wordlist.new(["burning dumpster","smashed window","moment of friendship","car set aflame","barricaded hallway"])
-        @things_we_do_to_things=Wordlist.new(["destroy","shatter","negate","reject"])	    
+        @things_we_do_to_things=Wordlist.new(["destroy","shatter","negate","reject"])
         @things_we_dont_do=Wordlist.new(["organize","negotiate","make demands","be productive"])
         @how_we_do_things=Wordlist.new(["in secret","without illusions","for once and for all","absolutely"])
         @describing_good_things=Wordlist.new(["singular","immanent","inoperative","radical"])
@@ -59,7 +59,7 @@ def do_something
   "Our need to #{things_we_do} is less the #{making_things} of a #{plans} than the #{making_things} of #{antiplans}."
 end
 
-def in_the 
+def in_the
   "In the #{making_things} of #{our_things}, we #{things_we_do_to_things} those who would have us give up the #{describing_good_things} #{happiness} of #{things_we_like} for the #{sadness} of #{things_we_dont_like}."
 end
 
@@ -72,14 +72,14 @@ def break_things
 end
 
 def this_call
-  "This is a call to #{things_we_like}, not an insistence on #{things_we_dont_like}." 
+  "This is a call to #{things_we_like}, not an insistence on #{things_we_dont_like}."
 end
 
 def whats_needed
   "What's needed is not #{things_we_dont_like}, and even far less <i>#{things_we_dont_like}</i>, but a putting-into-practice of #{describing_good_things} #{things_we_like}, a rejection in all forms of the #{fancy_words} of #{things_we_dont_like}."
 end
 
-def every_what 
+def every_what
   "Every #{symbolic_things} is a refusal to #{things_we_dont_do}, a blow against the #{fancy_words} of #{people_we_dont_like}, a recognition of the #{describing_good_things} #{fancy_words} inherent in the articulation of #{our_things}."
 end
 
@@ -113,7 +113,7 @@ get '/stylesheet.css' do
 end
 
 
-get '/' do 
+get '/' do
   @lists=Wordlists.new
   @title=title
   @sentences=[recognize,do_something,in_the,joke,break_things,this_call,whats_needed,every_what,necessary,symbols].sort_by {rand}
