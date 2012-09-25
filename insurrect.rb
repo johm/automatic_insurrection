@@ -1,51 +1,32 @@
-require 'rubygems'
 require 'haml'
 require 'sinatra'
 
-class Wordlist
-  attr_accessor :words
-
-  def initialize(words)
-    @words=words
-  end
-
-  def pick
-    return "FAIL" if @words.size==0
-    @words=@words.sort_by {rand}
-    @words.pop
-  end
-end
-
-class Wordlists
-  attr_accessor :things_we_like,:things_we_dont_like,:things_we_do,:symbolic_things,:people_we_dont_like,:things_we_do,:our_things,:things_we_do_to_things,:things_we_dont_do,:describing_good_things,:describing_bad_things,:fancy_words,:how_we_do_things,:happiness,:sadness,:really,:making_things,:plans,:antiplans,:events,:fun_stuff,:dont_do,:get_along,:go_away,:preposition
-
-  def initialize
-    @things_we_like=Wordlist.new(["rupture","insurrection","crisis","social war","zones of indistinction which need no justification","indifference"])
-    @things_we_dont_like=Wordlist.new(["activism","representation","humanism","totality","passivity","banality","fossilization of our desires","mobilization","impotentiality","normalization","absence"])
-    @people_we_dont_like=Wordlist.new(["the milieu","liberalism","the bureaucrats of revolt","anarcho-liberalism"])
-    @things_we_do=Wordlist.new(["desire","riot","occupy everything"])
-    @our_things=Wordlist.new(["communes","multiplicities","encounters","becomings","zones of offensive opacity","desiring-bodies"])
-    @symbolic_things=Wordlist.new(["burning dumpster","smashed window","moment of friendship","car set aflame","barricaded hallway"])
-    @things_we_do_to_things=Wordlist.new(["destroy","shatter","negate","reject"])
-    @things_we_dont_do=Wordlist.new(["organize","negotiate","make demands","be productive"])
-    @how_we_do_things=Wordlist.new(["in secret","without illusions","for once and for all","absolutely"])
-    @describing_good_things=Wordlist.new(["singular","immanent","inoperative","radical"])
-    @describing_bad_things=Wordlist.new(["homogenous","pathetic","compulsive"])
-    @fancy_words=Wordlist.new(["logic","structure","being","temporality","teleology"])
-    @happiness=Wordlist.new(["joy","ecstasy"])
-    @sadness=Wordlist.new(["misery","catastrophe"])
-    @really=Wordlist.new(["by any means necessary","with every weapon at our disposal","without looking back","at all costs"])
-    @making_things=Wordlist.new(["articulation","construction","elaboration","setting forth","realization"])
-    @plans=Wordlist.new(["plan","project","concept"])
-    @antiplans=Wordlist.new(["a <i>state of exception</i>","a <i>line of flight</i>","an <i>event</i>"])
-    @events=Wordlist.new(["orgies","festivals","conspiracies"])
-    @fun_stuff=Wordlist.new(["destruction","negation"])
-    @get_along=Wordlist.new(["dialogue","criticism","sympathy"])
-    @go_away=Wordlist.new(["scorn","contempt","derision"])
-    @dont_do=Wordlist.new(["refuse","neglect","fail"])
-    @preposition=Wordlist.new(["on","towards"])
-  end
-end
+WORD_LISTS = {
+  things_we_like: ["rupture","insurrection","crisis","social war","zones of indistinction which need no justification","indifference"],
+  things_we_dont_like: ["activism","representation","humanism","totality","passivity","banality","fossilization of our desires","mobilization","impotentiality","normalization","absence"],
+  people_we_dont_like: ["the milieu","liberalism","the bureaucrats of revolt","anarcho-liberalism"],
+  things_we_do: ["desire","riot","occupy everything"],
+  our_things: ["communes","multiplicities","encounters","becomings","zones of offensive opacity","desiring-bodies"],
+  symbolic_things: ["burning dumpster","smashed window","moment of friendship","car set aflame","barricaded hallway"],
+  things_we_do_to_things: ["destroy","shatter","negate","reject"],
+  things_we_dont_do: ["organize","negotiate","make demands","be productive"],
+  how_we_do_things: ["in secret","without illusions","for once and for all","absolutely"],
+  describing_good_things: ["singular","immanent","inoperative","radical"],
+  describing_bad_things: ["homogenous","pathetic","compulsive"],
+  fancy_words: ["logic","structure","being","temporality","teleology"],
+  happiness: ["joy","ecstasy"],
+  sadness: ["misery","catastrophe"],
+  really: ["by any means necessary","with every weapon at our disposal","without looking back","at all costs"],
+  making_things: ["articulation","construction","elaboration","setting forth","realization"],
+  plans: ["plan","project","concept"],
+  antiplans: ["a <i>state of exception</i>","a <i>line of flight</i>","an <i>event</i>"],
+  events: ["orgies","festivals","conspiracies"],
+  fun_stuff: ["destruction","negation"],
+  get_along: ["dialogue","criticism","sympathy"],
+  go_away: ["scorn","contempt","derision"],
+  dont_do: ["refuse","neglect","fail"],
+  preposition: ["on","towards"]
+}
 
 def recognize
   "Confronted with those who #{dont_do} to recognize themselves in our #{events} of #{fun_stuff}, we offer neither #{get_along} nor #{get_along} but only our #{go_away}."
@@ -91,10 +72,9 @@ def symbols
   "To those who deride the #{describing_good_things} #{happiness} in a #{symbolic_things} or a #{symbolic_things}, we propose nothing less than to #{things_we_do_to_things} their #{describing_bad_things} #{things_we_dont_like}, #{really}."
 end
 
-def method_missing(methId)
-  method_name=methId.id2name.intern
-  if @lists.respond_to? method_name
-    @lists.send(method_name).pick
+def method_missing(method_name)
+  if list = WORD_LISTS[method_name]
+    list.sample || raise('FAIL')
   else
     super
   end
@@ -106,7 +86,6 @@ get '/stylesheet.css' do
 end
 
 get '/' do
-  @lists=Wordlists.new
   @title=title
   @sentences=[recognize,do_something,in_the,joke,break_things,this_call,whats_needed,every_what,necessary,symbols].sort_by {rand}
   @pull_quote=@sentences[0]
