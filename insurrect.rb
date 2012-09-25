@@ -103,7 +103,7 @@ def method_missing(methId)
   if @lists.respond_to? method_name
     @lists.send(method_name).pick
   else
-    method_name
+    super
   end
 end
 
