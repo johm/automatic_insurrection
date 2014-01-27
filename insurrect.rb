@@ -29,55 +29,51 @@ WORD_LISTS = {
 }
 
 def recognize
-  "Confronted with those who #{dont_do} to recognize themselves in our #{events} of #{fun_stuff}, we offer neither #{get_along} nor #{get_along} but only our #{go_away}."
+  "Confronted with those who #{word(:dont_do)} to recognize themselves in our #{word(:events)} of #{word(:fun_stuff)}, we offer neither #{word(:get_along)} nor #{word(:get_along)} but only our #{word(:go_away)}."
 end
 
 def do_something
-  "Our need to #{things_we_do} is less the #{making_things} of a #{plans} than the #{making_things} of #{antiplans}."
+  "Our need to #{word(:things_we_do)} is less the #{word(:making_things)} of a #{word(:plans)} than the #{word(:making_things)} of #{word(:antiplans)}."
 end
 
 def in_the
-  "In the #{making_things} of #{our_things}, we #{things_we_do_to_things} those who would have us give up the #{describing_good_things} #{happiness} of #{things_we_like} for the #{sadness} of #{things_we_dont_like}."
+  "In the #{word(:making_things)} of #{word(:our_things)}, we #{word(:things_we_do_to_things)} those who would have us give up the #{word(:describing_good_things)} #{word(:happiness)} of #{word(:things_we_like)} for the #{word(:sadness)} of #{word(:things_we_dont_like)}."
 end
 
 def title
-  "Leaving #{things_we_dont_like} behind: Notes #{preposition} #{things_we_like}"
+  "Leaving #{word(:things_we_dont_like)} behind: Notes #{word(:preposition)} #{word(:things_we_like)}"
 end
 
 def break_things
-  "We must #{things_we_do_to_things} all #{things_we_dont_like}&#x2014;<i>#{how_we_do_things}</i>."
+  "We must #{word(:things_we_do_to_things)} all #{word(:things_we_dont_like)}&#x2014;<i>#{word(:how_we_do_things)}</i>."
 end
 
 def this_call
-  "This is a call to #{things_we_like}, not an insistence on #{things_we_dont_like}."
+  "This is a call to #{word(:things_we_like)}, not an insistence on #{word(:things_we_dont_like)}."
 end
 
 def whats_needed
-  "What's needed is not #{things_we_dont_like}, and even far less <i>#{things_we_dont_like}</i>, but a putting-into-practice of #{describing_good_things} #{things_we_like}, a rejection in all forms of the #{fancy_words} of #{things_we_dont_like}."
+  "What's needed is not #{word(:things_we_dont_like)}, and even far less <i>#{word(:things_we_dont_like)}</i>, but a putting-into-practice of #{word(:describing_good_things)} #{word(:things_we_like)}, a rejection in all forms of the #{word(:fancy_words)} of #{word(:things_we_dont_like)}."
 end
 
 def every_what
-  "Every #{symbolic_things} is a refusal to #{things_we_dont_do}, a blow against the #{fancy_words} of #{people_we_dont_like}, a recognition of the #{describing_good_things} #{fancy_words} inherent in the articulation of #{our_things}."
+  "Every #{word(:symbolic_things)} is a refusal to #{word(:things_we_dont_do)}, a blow against the #{word(:fancy_words)} of #{word(:people_we_dont_like)}, a recognition of the #{word(:describing_good_things)} #{word(:fancy_words)} inherent in the articulation of #{word(:our_things)}."
 end
 
 def joke
-  "The #{describing_bad_things} #{things_we_dont_like} proposed to us is like a bad joke, and instead of laughter we respond with #{things_we_like}."
+  "The #{word(:describing_bad_things)} #{word(:things_we_dont_like)} proposed to us is like a bad joke, and instead of laughter we respond with #{word(:things_we_like)}."
 end
 
 def necessary
-  "It is necessary to commence #{how_we_do_things}; not to dream of new ways to #{things_we_dont_do}, but to make manifest the subterranean #{our_things} in the heart of each #{symbolic_things}."
+  "It is necessary to commence #{word(:how_we_do_things)}; not to dream of new ways to #{word(:things_we_dont_do)}, but to make manifest the subterranean #{word(:our_things)} in the heart of each #{word(:symbolic_things)}."
 end
 
 def symbols
-  "To those who deride the #{describing_good_things} #{happiness} in a #{symbolic_things} or a #{symbolic_things}, we propose nothing less than to #{things_we_do_to_things} their #{describing_bad_things} #{things_we_dont_like}, #{really}."
+  "To those who deride the #{word(:describing_good_things)} #{word(:happiness)} in a #{word(:symbolic_things)} or a #{word(:symbolic_things)}, we propose nothing less than to #{word(:things_we_do_to_things)} their #{word(:describing_bad_things)} #{word(:things_we_dont_like)}, #{word(:really)}."
 end
 
-def method_missing(method_name)
-  if list = WORD_LISTS[method_name]
-    list.sample || raise('FAIL')
-  else
-    super
-  end
+def word(list_name)
+  WORD_LISTS.fetch(list_name).sample || raise('FAIL')
 end
 
 get '/stylesheet.css' do
