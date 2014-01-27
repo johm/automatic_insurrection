@@ -28,6 +28,10 @@ WORD_LISTS = {
   preposition: ["on","towards"]
 }
 
+def lists
+  Hash[WORD_LISTS.map {|list_name, words| [list_name, words.dup] }]
+end
+
 def recognize
   "Confronted with those who #{word(:dont_do)} to recognize themselves in our #{word(:events)} of #{word(:fun_stuff)}, we offer neither #{word(:get_along)} nor #{word(:get_along)} but only our #{word(:go_away)}."
 end
@@ -73,7 +77,8 @@ def symbols
 end
 
 def word(list_name)
-  WORD_LISTS.fetch(list_name).sample || raise('FAIL')
+  list = @lists.fetch(list_name)
+  list.delete_at(rand(list.length)) || raise('FAIL')
 end
 
 get '/stylesheet.css' do
@@ -82,6 +87,7 @@ get '/stylesheet.css' do
 end
 
 get '/' do
+  @lists=lists
   @title=title
   @sentences=[recognize,do_something,in_the,joke,break_things,this_call,whats_needed,every_what,necessary,symbols].sort_by {rand}
   @pull_quote=@sentences[0]
