@@ -89,9 +89,9 @@ end
 get '/' do
   @lists=lists
   @title=title
-  @sentences=[recognize,do_something,in_the,joke,break_things,this_call,whats_needed,every_what,necessary,symbols].sort_by {rand}
+  @sentences=[recognize,do_something,in_the,joke,break_things,this_call,whats_needed,every_what,necessary,symbols].shuffle
   @pull_quote=@sentences[0]
-  @shuffled_sentences=@sentences.sort_by {rand}
+  @shuffled_sentences=@sentences.shuffle
   @babble=@shuffled_sentences[0,4].join(" ")
   @more_babble=@shuffled_sentences[4..7].join(" ")
   @even_more_babble=@shuffled_sentences[8..@shuffled_sentences.size].join(" ")
